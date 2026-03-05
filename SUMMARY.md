@@ -15,6 +15,7 @@
 * [Развертывание проекта](setting-up-dev-environment/manual-deployment-project/README.md)
   * [Установка PostgreSQL](setting-up-dev-environment/manual-deployment-project/installing_postgresql.md)
   * [Добавление мобильного приложения](setting-up-dev-environment/manual-deployment-project/adding_mobile_app.md)
+  * [Добавление web-приложения](setting-up-dev-environment/manual-deployment-project/adding_web-app.md)
 * [Workflow Installer](setting-up-dev-environment/workflow-installer.md)
 * [Установка Workflow XML Editor](setting-up-dev-environment/editor_installation.md)
 * [Подключение и настройка проекта](setting-up-dev-environment/create_project.md)
