@@ -149,7 +149,7 @@
 * [appsettings.json](https://wfsys.gitbook.io/wt-knowledge-base/platforma-wt/configuration-files/appsettings.json) - настройки доступа к базе данных, временной зоной сервера и другие;&#x20;
 * [hosting.json](https://wfsys.gitbook.io/wt-knowledge-base/platforma-wt/configuration-files/hosting.json) - IP-адрес и порт сервера.
 
-Файл **\_start.bat** запускает наше web-приложение.
+Файл **\_start.bat** запускает приложение WebApplication.
 
 ### Разворачивание и настройка <a href="#we-deployment-and-configuration" id="we-deployment-and-configuration"></a>
 

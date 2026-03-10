@@ -6,17 +6,14 @@
 
 ## План <a href="#plan" id="plan"></a>
 
-#### **Этап 1. Подготовка бинарников и форм** <a href="#step-1" id="step-1"></a>
+#### **Этап 1. Подготовка бинарников** <a href="#step-1" id="step-1"></a>
 
 1. В папке с развернутой серверной частью создать папку \Web, в которой будут храниться бинарники для web-приложения.\
-   Например, D:\WorkflowEngine\Template\Web
-2. Скопировать бинарники из папки WebBin [архива](adding_web-app.md#archive) в созданную папку \Web.
-3. В папке \Template\Projects\1. Template разархивированного учебного проекта создать папку \WebForms, в которой будут храниться xml-файлы форм web-мобильного приложения.\
-   Например, D:\WT\Projects\Template\Projects\1. Template\WebForms
-4. Скопировать содержимое папки WebForms из [архива](adding_web-app.md#archive) в созданную папку \WebForms.
-5. В папке \Template\Projects\1. Template разархивированного учебного проекта создать папку \Web, в которой будет храниться razor-приложение для сборки исполнительного файла клиентского приложения.\
-   Например, D:\WT\Projects\Template\Projects\1. Template\WebForms
-6. Скопировать содержимое папки WebApp из [архива](adding_web-app.md#archive) в созданную папку \Web.
+   Например, D:\WorkflowEngine\Template\Web.
+2. Скопировать стандартный конфигурационный файлы appsettings.json из папки config [архива](adding_web-app.md#archive) в папку D:\WorkflowEngine\Template\Web.
+3. Скопировать бинарники из папки bin [архива](adding_web-app.md#archive) в созданную папку \Web.
+4. Скопировать файл \_start.bat из [архива](adding_web-app.md#we-archive) в папку D:\WorkflowEngine\Template\Web.
+5. Для удобства запуска серверной части создать ярлык на файл D:\WorkflowEngine\Template\Web\\\_start.bat, переименовав его (например, в Template WEB).
 
 #### Этап 2. Настройка конфига <a href="#step-2" id="step-2"></a>
 
@@ -33,15 +30,21 @@
 
 ## Архив <a href="#archive" id="archive"></a>
 
-Скачайте архив с бинарниками и xml-файлами форм:
+Скачайте бинарники нужной разрядности:
 
-{% file src="../../.gitbook/assets/WorkflowMobileForms.zip" %}
+<table data-card-size="large" data-view="cards"><thead><tr><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>WorkflowWebForms_x64.zip</td><td></td></tr><tr><td>WorkflowWebForms_x86.zip</td><td></td></tr></tbody></table>
 
-Архив содержит две папки:
+Независимо от разрядности структура папок и файлов будет одинаковая. Основные элементы архивов:
 
-* WebBin - папка с бинарниками для web-приложений;
-* WebForms - папка с xml-файлами форм;
-* WebApp - папка с исходными файлами Razor-приложения для сборки исполняемых файлов web-приложения.
+<figure><img src="../../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+
+Web-приложение построено на базе .Net Core 6.0, что позволяет сделать его портативным. Поэтому в папке **bin** лежат все необходимые dll-файлы, чтобы на клиентском сервере не приходилось отдельно устанавливать .NET Core SDK.
+
+В папке **config** лежит конфигурационный файл [appsettings.json](https://wfsys.gitbook.io/wt-knowledge-base/platform-wt/configuration-files/web/appsettings-json), хранящий настройки доступа к web-приложению и адрес серверной части.
+
+Файл **\_start.bat** запускает наше web-приложение.
+
+### Разворачивание и настройка <a href="#deployment-and-configuration" id="deployment-and-configuration"></a>
 
 ## **Подготовка бинарников и форм** <a href="#preparing-binaries-and-forms" id="preparing-binaries-and-forms"></a>
 
@@ -81,3 +84,10 @@ DROP EXTENSION pgcrypto;
 ```
 
 Этот же пароль необходимо указать и в файле конфига.
+
+## Структура проекта <a href="#project-structure" id="project-structure"></a>
+
+
+
+
+
