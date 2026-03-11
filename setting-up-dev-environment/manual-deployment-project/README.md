@@ -6,6 +6,8 @@
 
 ## План развертывания проекта <a href="#project-deployment-plan" id="project-deployment-plan"></a>
 
+[Этап 1](./#step-1) и [Этап 2](./#step-2) обязательны для любой версии приложения. В данном плане [Этап 3](./#step-3) относится к desktop-версии WT-программы. Если необходимо развернуть web-версию программы, то после первых двух этапов обратитесь к статье [Добавление web-приложения](adding_web-app.md).
+
 #### **Этап 1. Восстановление БД** <a href="#step-1" id="step-1"></a>
 
 1. [Создать новую БД](./#create-database) (например, template\_project) и [восстановить резервную копию](./#restore-backup) из файла Template\Development\database\create\create.backup.
