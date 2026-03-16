@@ -92,106 +92,18 @@ DROP EXTENSION pgcrypto;
 
 Скопируем файл \_start.bat из [архива](adding_web-app.md#we-archive) в папку D:\WorkflowEngine\Template\Web. Для удобства запуска серверной части создадим ярлык на файл D:\WorkflowEngine\Template\Web\\\_start.bat, переименовав его (например, в Template WEB).
 
-## Структура web-приложени <a href="#project-structure" id="project-structure"></a>
 
-В папке учебного проекта _\1. Template\Web_ лежит проект для создания библиотеки классов Razor, предназначенной для выполнения на серверном приложении Blazor. Проект имеет структуру:
 
-<figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+Проверим, что запущена [серверная часть WT-программы](https://wfsys.gitbook.io/workflow-technology/setting-up-dev-environment/manual-deployment-project#server). При необходимости запустим.
 
-В папке Pages находятся razor-страницы для создания отрисованного веб-интерфейса на сервере, из которого создаются HTML-код и CSS страницы в ответ на запрос браузера. Страница поступает на клиент уже готовая для просмотра.
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-Razor-страницы создаются на основе xml-файлов форм, в котрых прописываются все элементы страницы и команды взаимодействия со страницей и данными.
+Запустим web-приложение.
 
-### Стартовая форма <a href="#home_page" id="home_page"></a>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-Рассмотрим стартовую форму TemplateStart.xml и ее razor-страницу TemplateStart.razor.
+В браузере обратимся по адресу [http://localhost:49708](http://localhost:49708) (при необходимости укажите свой порт) к нашему web-приложению и проверим, что приложение доступно:
 
-Xml-файл стартовой формы содержит следующий код:
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-{% code title="TemplateStart.xml" lineNumbers="true" %}
-```xml
-<?xml version="1.0"?>
-<Form Name="home" StartPage="True" FontStyle="TitleFont" ForeColor="Black" ValidationType="Flat">
-  <Parameters />  
-  <Appearance>...</Appearance>  
-  <DataConnections />  
-  <Commands />  
-  <Conditions />  
-  <Executions />
-    
-  <MyObjects>
-    <MyObject Name="Label" Type="Label" Assembly="BaseControls">
-      <Top>5</Top>
-      <Left>5</Left>
-      <Height>50</Height>
-      <Width>200</Width>
-      <TextAlign>TopLeft</TextAlign>
-      <Text>Hello world!</Text>
-    </MyObject>
-  </MyObjects>
-</Form>
-```
-{% endcode %}
-
-В тэге `<Form>` в атрибуте [`Name`](https://wfsys.gitbook.io/workflow-web-forms-syntax#name) указывается системно имя, по которому будет доступна web-страницы в браузере.
-
-В тэге `<Form>` в атрибуте [`StartPage`](https://wfsys.gitbook.io/workflow-web-forms-syntax#start_page) указывается признак, что данная страница является стартовой для web-приложения. Web-приложение должно иметь одну и только одну стартовую форму.
-
-{% hint style="warning" %}
-Если несколько форм имеют атрибут `StartPage` со значением True, то это приведет к некорректной маршрутизации.
-
-Если ни одна из форм не имеет атрибут `StartPage` со значением True, то попытка обращения к стартовой странице вызовет ошибку 404 (страница не найдена).
-{% endhint %}
-
-Содержимое файла TemplateStart.razor соответствующего стартовой странице:
-
-{% code title="TemplateStart.razor" lineNumbers="true" %}
-```razor
-@page "/"
-@page "/home"
-@inherits WorkflowForm
-
-<div id="form-content" class="content">
-    <PageTitle>@Title</PageTitle>
-    <FormLoadingBarControl Form=this></FormLoadingBarControl>
-    <FormLockPanel Form=this></FormLockPanel>
-    <FormImageViewer Form=this></FormImageViewer>
-    <LicenseWarningPanel Form=this></LicenseWarningPanel>
-    <HelpDeskPanel Form=this></HelpDeskPanel>
-    
-    <Label Name="Label" Form=this @ref="label"></Label>
-
-</div>
-<style>@this.ContentStyle</style>
-
-@code{
-    Label label;
-
-    protected override void AddControlsFromPage()
-    {
-        controls.Add(label.Name, label.Control);
-    }
-}
-```
-{% endcode %}
-
-В начале файла видим две директивы:&#x20;
-
-* `@page "/"` - url-адрес стартовой страницы, соответствует атрибуту `StartPage`;
-* `@page "/home"` - url-адрес с именем формы, указанным в атрибуте `Name`.
-
-По этим путям страница будет доступна в браузере.
-
-В xml-файле формы описан один объект Label, и в razor-файле видим его упоминание и добавление в коллекцию controls. Но в razor-файле нет упоминания о тексте, который будет отображаться в этом элементе на web-странице.&#x20;
-
-### Форма логина <a href="#login_page" id="login_page"></a>
-
-В проекте есть файл TemplateLogin.xml, который подготовлен для создания полноценной web-страницы аутентификации пользователя. На его основе создана razor-страница TemplateLogin.razor, в которой можно видеть только одну директиву `@page "/login"` с именем формы, указанным в атрибуте `Name` тэга `<Form>` xml-файла.  Так как в web-проекте уже есть стартовая страница, то страница логина не может быть стартовой.
-
-Дать имя web-странице для логина можно любое, главное указать это имя в файле конфигурации \Web\appsettings.json в поле [LoginPageUrl](https://wfsys.gitbook.io/wt-knowledge-base/platform-wt/configuration-files/web/appsettings-json#login_page_url):
-
-```json
-"LoginPageUrl": "login",
-```
-
-Так web-приложение будет знать, на какую web-страницу перенаправлять пользователя, если он еще не прошел аутентификацию, или не проявлял активности в течение определенного времени ([TimeoutInterval](https://wfsys.gitbook.io/wt-knowledge-base/platform-wt/configuration-files/web/appsettings-json#timeout_interval)).
+Отлично! Web-приложение успешно работает.
