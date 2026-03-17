@@ -98,7 +98,7 @@ DROP EXTENSION pgcrypto;
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-Запустим web-приложение.
+Запустим web-приложение с помощью файла \_start.bat:
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
